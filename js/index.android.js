@@ -11,10 +11,7 @@ const BackgroundTask: BackgroundTaskInterface = {
 
   define: function(task) {
     // Register the headless task
-    const fn = async () => {
-      task()
-    }
-    AppRegistry.registerHeadlessTask('BackgroundTask', () => fn)
+    AppRegistry.registerHeadlessTask('BackgroundTask', () => task)
   },
 
   schedule: function(
