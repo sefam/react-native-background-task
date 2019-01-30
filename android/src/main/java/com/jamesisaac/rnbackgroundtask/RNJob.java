@@ -32,7 +32,11 @@ public class RNJob extends Job {
         Context context = getContext().getApplicationContext();
         Intent service = new Intent(context, HeadlessTaskService.class);
         service.putExtras(headlessExtras);
-        context.startService(service);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(service);
+        } else {
+            context.startService(service);
+        }
 
         return Result.SUCCESS;
     }
