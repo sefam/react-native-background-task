@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import com.evernote.android.job.util.support.PersistableBundleCompat;
 import com.evernote.android.job.Job;
-
+import android.os.Build;
 /**
  * The single task which this library is able to schedule.
  *
