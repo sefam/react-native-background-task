@@ -30,12 +30,14 @@ public class RNJob extends Job {
         headlessExtras.putInt("timeout", requestExtras.getInt("timeout", 30));
 
         Context context = getContext().getApplicationContext();
-        Intent service = new Intent(context, HeadlessTaskService.class);
-        service.putExtras(headlessExtras);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(service);
-        } else {
-            context.startService(service);
+        if (!BackgroundTaskModule.isAppOnForeground(context)) {
+            Intent service = new Intent(context, HeadlessTaskService.class);
+            service.putExtras(headlessExtras);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(service);
+            } else {
+                context.startService(service);
+            }
         }
 
         return Result.SUCCESS;
